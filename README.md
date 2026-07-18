@@ -57,6 +57,17 @@ FastAPI endpoints:
 
 CORS is enabled and the service runs with only the heuristic core.
 
+
+
+## Deploy as a hosted developer tool
+
+AgentGuard ships as a library **and** a deployable API + client SDK.
+
+- **API auth & limits:** set `AGENTGUARD_API_KEYS` (comma-separated) to require `Authorization: Bearer <key>`; per-key rate limiting via `AGENTGUARD_RATE_LIMIT` / `AGENTGUARD_RATE_WINDOW_S`. Unset = open mode for local dev / playground.
+- **Deploy the API:** container `Dockerfile` + `render.yaml` + `fly.toml`. See [docs/DEPLOY.md](docs/DEPLOY.md). (FastAPI doesn't run natively on Vercel — host the API on a container platform and put a web playground on Vercel.)
+- **JS/TS client:** [`@agentguard/client`](clients/js/README.md) for LangChain.js / Vercel AI SDK developers.
+- **Publish:** tag `vX.Y.Z` to publish `agentguard` to PyPI via GitHub Actions.
+
 ## Non-goals
 
 AgentGuard is not output moderation, not a WAF, and not a guarantee. It raises risk-scored findings; humans and policy decide what to do. No detector is complete.
