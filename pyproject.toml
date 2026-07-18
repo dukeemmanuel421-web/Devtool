@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentguard"
+version = "0.1.0"
+description = "Inbound prompt-injection and context-integrity firewall for AI agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "AgentGuard Contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+server = ["fastapi>=0.110", "uvicorn>=0.27"]
+llm = ["openai>=1.0"]
+probe = ["torch", "transformers"]
+dev = ["pytest>=8", "fastapi>=0.110", "httpx>=0.27"]
+
+[project.scripts]
+agentguard = "agentguard.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentguard"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
